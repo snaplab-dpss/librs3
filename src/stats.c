@@ -1,4 +1,4 @@
-#include "../include/r3s.h"
+#include "../include/rs3.h"
 #include "hash.h"
 #include "printer.h"
 

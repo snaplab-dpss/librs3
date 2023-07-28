@@ -4,7 +4,7 @@
 
 cmake_minimum_required(VERSION 3.10)
 
-project("r3s")
+project("rs3")
 
 include(GNUInstallDirs)
 
@@ -42,7 +42,7 @@ endif()
 
 
 ###############################################################################
-# Create r3s library
+# Create rs3 library
 ###############################################################################
 
 file(GLOB SOURCES ${PROJECT_SOURCE_DIR}/src/*.c)

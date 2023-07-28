@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <r3s.h>
+#include <rs3.h>
 
 int main() {
     R3S_cfg_t       cfg;

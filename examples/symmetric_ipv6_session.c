@@ -1,4 +1,4 @@
-#include <r3s.h>
+#include <rs3.h>
 
 Z3_ast R3S_cnstr_symmetric_ipv6(R3S_cfg_t cfg, R3S_packet_ast_t p1, R3S_packet_ast_t p2)
 {

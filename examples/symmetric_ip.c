@@ -1,4 +1,4 @@
-#include <r3s.h>
+#include <rs3.h>
 
 int main () {
     R3S_status_t    status;

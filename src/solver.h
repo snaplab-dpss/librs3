@@ -1,7 +1,7 @@
 #ifndef __R3S_SOLVER_H__
 #define __R3S_SOLVER_H__
 
-#include "../include/r3s.h"
+#include "../include/rs3.h"
 
 #define SOLVER_TIMEOUT_SEC      (60 * 60 * 3) // 3 hours
 

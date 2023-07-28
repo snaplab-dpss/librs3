@@ -405,7 +405,7 @@ typedef struct {
 
 /**
  * \struct R3S_cfg_t
- * \brief R3S configuration used to store information useful
+ * \brief RS3 configuration used to store information useful
  * throughout the API.
  */
 typedef __R3S_cfg_t *R3S_cfg_t;
@@ -423,7 +423,7 @@ typedef struct {
 /**
  * \brief Definition of the function used to represent constraints between packets.
  * 
- * \param cfg R3S configuration
+ * \param cfg RS3 configuration
  * \param ctx Z3 context
  * \param p1 A packet
  * \param p2 Another packet
@@ -447,7 +447,7 @@ typedef struct
  * \brief Key statistics.
  */
 typedef struct {
-    R3S_cfg_t        cfg;         //!< R3S configuration.
+    R3S_cfg_t        cfg;         //!< RS3 configuration.
     R3S_core_stats_t *core_stats; //!< Statistics related to each core.
     unsigned         n_cores;     //!< Total number of cores to be considered.
     float            avg_dist;    //!< Average distribution of packets per core (in percentage).
@@ -467,7 +467,7 @@ typedef struct {
 } R3S_packet_from_cnstrs_data_t;
 
 /**
- * \brief R3S boilerplate string.
+ * \brief RS3 boilerplate string.
  * \note There is no need to worry about freeing memory when using this.
  */
 typedef char* R3S_string_t;
@@ -590,21 +590,21 @@ void R3S_cfg_set_user_data(out R3S_cfg_t cfg, void* data);
 
 /**
  * \brief Retrieve the previously set user_data field on the given configuration.
- * \param cfg R3S configuration.
+ * \param cfg RS3 configuration.
  * \return Retrieved data.
  */
 void* R3S_cfg_get_user_data(R3S_cfg_t cfg);
 
 /**
  * \brief Get Z3 context. This can be useful while generating packet constraints.
- * \param cfg R3S configuration.
+ * \param cfg RS3 configuration.
  * \return Retrieved context.
  */
 Z3_context R3S_cfg_get_z3_context(R3S_cfg_t cfg);
 
 /**
  * \brief Indicate if the solver should try to find keys that provide a good distribution of packets among the cores.
- * \param cfg R3S configuration to modify.
+ * \param cfg RS3 configuration to modify.
  * \param skew_analysis Value indicating if skew analysis should be performed.
  *
  * \return ::R3S_STATUS_SUCCESS
@@ -626,7 +626,7 @@ R3S_status_t R3S_cfg_set_skew_analysis(out R3S_cfg_t cfg, bool skew_analysis);
  * this function will have no impact on the configuration, and returns
  * ::R3S_STATUS_NOP.
  *
- * \param cfg R3S configuration to modify.
+ * \param cfg RS3 configuration to modify.
  * \param n_procs Number of processes to be used by the solver.
  *
  * \return ::R3S_STATUS_SUCESS
@@ -641,7 +641,7 @@ R3S_status_t R3S_cfg_set_number_of_processes(out R3S_cfg_t cfg, int n_procs);
 
 /**
  * \brief Get number of keys (devices) associated with this configuration.
- * \param cfg R3S configuration.
+ * \param cfg RS3 configuration.
  * \return Number of keys.
  */
 unsigned R3S_cfg_get_number_of_keys(R3S_cfg_t cfg);
@@ -656,7 +656,7 @@ unsigned R3S_cfg_get_number_of_keys(R3S_cfg_t cfg);
  * will check the existence of this file. If this file doesn't exist, it will return
  * ::R3S_STATUS_IO_ERROR.
  *
- * \param cfg R3S configuration to modify.
+ * \param cfg RS3 configuration to modify.
  * \param params Skew analysis configuration parameters.
  *
  * \return ::R3S_STATUS_SUCESS
@@ -684,7 +684,7 @@ void R3S_packet_init(R3S_packet_t *p);
 /**
  * Set packet field in packet.
  * 
- * \param cfg R3S configuration.
+ * \param cfg RS3 configuration.
  * \param pf Type of packet field to store.
  * \param v Value of the packet field.
  * \param p Pointer to a packet with the value set.
@@ -728,7 +728,7 @@ bool R3S_stats_eval(R3S_cfg_t cfg, R3S_key_t key, out R3S_stats_t *stats);
 
 /**
  * \brief Randomize a key.
- * \param cfg R3S configuration.
+ * \param cfg RS3 configuration.
  * \param key Key to randomize.
  */
 void R3S_key_rand(R3S_cfg_t cfg, out R3S_key_t key);
@@ -782,7 +782,7 @@ void R3S_key_rand(R3S_cfg_t cfg, out R3S_key_t key);
  *   - mk_p_cnstrs[5]    => constraints between k[1] and k[2]
  * 
  * 
- * \param r3s_cfg R3S configuration containing the number of keys to be used.
+ * \param r3s_cfg RS3 configuration containing the number of keys to be used.
  * \param mk_p_cnstrs Function used to represent constraints between packets.
  * \param keys Array of generated keys that respect the constraints given.
  * 

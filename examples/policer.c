@@ -17,7 +17,7 @@
  * sends packets with the same destination IP address to the same core.
  */
 
-#include <r3s.h>
+#include <rs3.h>
 #include <stdio.h>
 #include <stdlib.h>
 
