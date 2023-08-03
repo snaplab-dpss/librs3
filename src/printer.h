@@ -1,5 +1,5 @@
-#ifndef __R3S_PRINTER_H__
-#define __R3S_PRINTER_H__
+#ifndef __RS3_PRINTER_H__
+#define __RS3_PRINTER_H__
 
 #include <sys/types.h>
 #include <unistd.h>
@@ -23,6 +23,6 @@
 #define BIT_FROM_BYTE(b, i)         (((b) >> (i)) & 1)
 #define BIT_FROM_KEY(b, k)          (BIT_FROM_BYTE((k)[(b) / 8], 7 - ((b) % 8)))
 
-#define R3S_STRING_SZ           10000
+#define RS3_STRING_SZ           10000
 
 #endif

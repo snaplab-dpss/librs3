@@ -14,4 +14,5 @@ set(EXAMPLES_SOURCES ${EXAMPLES_SOURCES}
     ${PROJECT_SOURCE_DIR}/examples/firewall.c
     ${PROJECT_SOURCE_DIR}/examples/nat.c
     ${PROJECT_SOURCE_DIR}/examples/no_constraints.c
+    ${PROJECT_SOURCE_DIR}/examples/hhh.c
 )

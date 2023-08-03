@@ -17,7 +17,8 @@ RELEASE_BUILD="$BUILD_TYPES_DIR/release"
 
 RS3_LIBS_DIR="$BUILD_DIR/libs"
 RS3_INCLUDE_DIR="$BUILD_DIR/include"
-RS3_EXAMPLES_DIR="$BUILD_DIR/examples"
+RS3_EXAMPLES_DEBUG_DIR="$BUILD_DIR/examples-debug"
+RS3_EXAMPLES_RELEASE_DIR="$BUILD_DIR/examples-release"
 RS3_DOCS_DIR="$BUILD_DIR/docs"
 
 if [ -z $Z3_DIR ]; then
@@ -56,5 +57,6 @@ link $RS3_LIBS_DIR/librs3d.so $DEBUG_BUILD/lib/librs3d.so
 link $RS3_LIBS_DIR/librs3.so $RELEASE_BUILD/lib/librs3.so
 
 link $RS3_INCLUDE_DIR $RS3_DIR/include/
-link $RS3_EXAMPLES_DIR $DEBUG_BUILD/bin/
+link $RS3_EXAMPLES_DEBUG_DIR $DEBUG_BUILD/bin/
+link $RS3_EXAMPLES_RELEASE_DIR $RELEASE_BUILD/bin/
 link $RS3_DOCS_DIR $RELEASE_BUILD/docs/html/

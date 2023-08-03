@@ -6,237 +6,266 @@
 #include <stdlib.h>
 #include <assert.h>
 
-size_t R3S_pf_sz_bits(R3S_pf_t pf)
-{
-    switch (pf)
-    {
-        case R3S_PF_VXLAN_UDP_OUTER:  return sizeof(R3S_port_t)  * 8;
-        case R3S_PF_VXLAN_VNI:        return sizeof(R3S_vni_t)   * 8;
-        case R3S_PF_IPV4_SRC:         return sizeof(R3S_ipv4_t)  * 8;
-        case R3S_PF_IPV4_DST:         return sizeof(R3S_ipv4_t)  * 8;
-        case R3S_PF_IPV6_SRC:         return sizeof(R3S_ipv6_t)  * 8;
-        case R3S_PF_IPV6_DST:         return sizeof(R3S_ipv6_t)  * 8;
-        case R3S_PF_TCP_SRC:          return sizeof(R3S_port_t)  * 8;
-        case R3S_PF_TCP_DST:          return sizeof(R3S_port_t)  * 8;
-        case R3S_PF_UDP_SRC:          return sizeof(R3S_port_t)  * 8;
-        case R3S_PF_UDP_DST:          return sizeof(R3S_port_t)  * 8;
-        case R3S_PF_SCTP_SRC:         return sizeof(R3S_port_t)  * 8;
-        case R3S_PF_SCTP_DST:         return sizeof(R3S_port_t)  * 8;
-        case R3S_PF_SCTP_V_TAG:       return sizeof(R3S_v_tag_t) * 8;
-        case R3S_PF_ETHERTYPE:        return 6;
-        default:                        assert(false);
-    }
+size_t RS3_pf_sz_bits(RS3_pf_t pf) {
+  switch (pf) {
+    case RS3_PF_VXLAN_UDP_OUTER:
+      return sizeof(RS3_port_t) * 8;
+    case RS3_PF_VXLAN_VNI:
+      return sizeof(RS3_vni_t) * 8;
+    case RS3_PF_IPV4_SRC:
+      return sizeof(RS3_ipv4_t) * 8;
+    case RS3_PF_IPV4_DST:
+      return sizeof(RS3_ipv4_t) * 8;
+    case RS3_PF_IPV6_SRC:
+      return sizeof(RS3_ipv6_t) * 8;
+    case RS3_PF_IPV6_DST:
+      return sizeof(RS3_ipv6_t) * 8;
+    case RS3_PF_TCP_SRC:
+      return sizeof(RS3_port_t) * 8;
+    case RS3_PF_TCP_DST:
+      return sizeof(RS3_port_t) * 8;
+    case RS3_PF_UDP_SRC:
+      return sizeof(RS3_port_t) * 8;
+    case RS3_PF_UDP_DST:
+      return sizeof(RS3_port_t) * 8;
+    case RS3_PF_SCTP_SRC:
+      return sizeof(RS3_port_t) * 8;
+    case RS3_PF_SCTP_DST:
+      return sizeof(RS3_port_t) * 8;
+    case RS3_PF_SCTP_V_TAG:
+      return sizeof(RS3_v_tag_t) * 8;
+    case RS3_PF_ETHERTYPE:
+      return 6;
+    default:
+      assert(false);
+  }
 }
 
-R3S_bytes_t R3S_packet_get_field(R3S_packet_t *p, R3S_pf_t pf)
-{
-    switch (pf)
-    {
-        case R3S_PF_VXLAN_UDP_OUTER:  return (R3S_bytes_t) p->vxlan.outer;
-        case R3S_PF_VXLAN_VNI:        return (R3S_bytes_t) p->vxlan.vni;
-        case R3S_PF_IPV4_SRC:         return (R3S_bytes_t) p->ipv4.src;
-        case R3S_PF_IPV4_DST:         return (R3S_bytes_t) p->ipv4.dst;
-        case R3S_PF_IPV6_SRC:         return (R3S_bytes_t) p->ipv6.src;
-        case R3S_PF_IPV6_DST:         return (R3S_bytes_t) p->ipv6.dst;
-        case R3S_PF_TCP_SRC:          return (R3S_bytes_t) p->tcp.src;
-        case R3S_PF_TCP_DST:          return (R3S_bytes_t) p->tcp.dst;
-        case R3S_PF_UDP_SRC:          return (R3S_bytes_t) p->udp.src;
-        case R3S_PF_UDP_DST:          return (R3S_bytes_t) p->udp.dst;
-        case R3S_PF_SCTP_SRC:         return (R3S_bytes_t) p->sctp.src;
-        case R3S_PF_SCTP_DST:         return (R3S_bytes_t) p->sctp.dst;
-        case R3S_PF_SCTP_V_TAG:       return (R3S_bytes_t) p->sctp.tag;
-        case R3S_PF_ETHERTYPE:        return (R3S_bytes_t) p->ethertype;
-    }
-    
-    fprintf(stderr, "ERROR: field %d not found on header\n", pf);
-    assert(false);
+RS3_bytes_t RS3_packet_get_field(RS3_packet_t *p, RS3_pf_t pf) {
+  switch (pf) {
+    case RS3_PF_VXLAN_UDP_OUTER:
+      return (RS3_bytes_t)p->vxlan.outer;
+    case RS3_PF_VXLAN_VNI:
+      return (RS3_bytes_t)p->vxlan.vni;
+    case RS3_PF_IPV4_SRC:
+      return (RS3_bytes_t)p->ipv4.src;
+    case RS3_PF_IPV4_DST:
+      return (RS3_bytes_t)p->ipv4.dst;
+    case RS3_PF_IPV6_SRC:
+      return (RS3_bytes_t)p->ipv6.src;
+    case RS3_PF_IPV6_DST:
+      return (RS3_bytes_t)p->ipv6.dst;
+    case RS3_PF_TCP_SRC:
+      return (RS3_bytes_t)p->tcp.src;
+    case RS3_PF_TCP_DST:
+      return (RS3_bytes_t)p->tcp.dst;
+    case RS3_PF_UDP_SRC:
+      return (RS3_bytes_t)p->udp.src;
+    case RS3_PF_UDP_DST:
+      return (RS3_bytes_t)p->udp.dst;
+    case RS3_PF_SCTP_SRC:
+      return (RS3_bytes_t)p->sctp.src;
+    case RS3_PF_SCTP_DST:
+      return (RS3_bytes_t)p->sctp.dst;
+    case RS3_PF_SCTP_V_TAG:
+      return (RS3_bytes_t)p->sctp.tag;
+    case RS3_PF_ETHERTYPE:
+      return (RS3_bytes_t)p->ethertype;
+  }
+
+  fprintf(stderr, "ERROR: field %d not found on header\n", pf);
+  assert(false);
 }
 
-void R3S_packet_init(R3S_packet_t *p)
-{
-    p->cfg = 0;
+void RS3_packet_init(RS3_packet_t *p) { p->cfg = 0; }
+
+bool RS3_packet_has_pf(RS3_packet_t p, RS3_pf_t pf) {
+  return (p.cfg >> pf) & 1;
 }
 
-bool R3S_packet_has_pf(R3S_packet_t p, R3S_pf_t pf)
-{
-    return (p.cfg >> pf) & 1;
+RS3_status_t RS3_packet_set_pf(RS3_cfg_t cfg, RS3_pf_t pf, RS3_bytes_t v,
+                               RS3_packet_t *p) {
+  RS3_bytes_t field;
+  RS3_in_cfg_t test_cfg;
+  unsigned n_pfs;
+  bool compatible_pf;
+
+  test_cfg = p->cfg | (1 << pf);
+
+  if (!RS3_cfg_are_compatible_pfs(cfg, test_cfg))
+    return RS3_STATUS_PF_INCOMPATIBLE;
+
+  p->cfg = test_cfg;
+  field = RS3_packet_get_field(p, pf);
+
+  for (unsigned byte = 0; byte < RS3_pf_sz(pf); byte++)
+    field[byte] = v[byte];
+
+  return RS3_STATUS_SUCCESS;
 }
 
-R3S_status_t R3S_packet_set_pf(R3S_cfg_t cfg, R3S_pf_t pf, R3S_bytes_t v, R3S_packet_t *p)
-{
-    R3S_bytes_t field;
-    R3S_in_cfg_t test_cfg;
-    unsigned    n_pfs;
-    bool        compatible_pf;
-
-    test_cfg = p->cfg | (1 << pf);
-
-    if (!R3S_cfg_are_compatible_pfs(cfg, test_cfg))
-        return R3S_STATUS_PF_INCOMPATIBLE;
-
-    p->cfg   = test_cfg;
-    field = R3S_packet_get_field(p, pf);
-
-    for (unsigned byte = 0; byte < R3S_pf_sz(pf); byte++)
-        field[byte] = v[byte];
-
-    return R3S_STATUS_SUCCESS;
+RS3_status_t RS3_packet_set_ethertype(RS3_cfg_t cfg, RS3_ethertype_t ethertype,
+                                      RS3_packet_t *p) {
+  return RS3_packet_set_pf(cfg, RS3_PF_ETHERTYPE, ethertype, p);
 }
 
-R3S_status_t R3S_packet_set_ethertype(R3S_cfg_t cfg, R3S_ethertype_t ethertype, R3S_packet_t *p)
-{
-    return R3S_packet_set_pf(cfg, R3S_PF_ETHERTYPE, ethertype, p);
-}
+RS3_status_t RS3_packet_set_ipv4(RS3_cfg_t cfg, RS3_ipv4_t src, RS3_ipv4_t dst,
+                                 RS3_packet_t *p) {
+  RS3_status_t status;
 
-R3S_status_t R3S_packet_set_ipv4(R3S_cfg_t cfg, R3S_ipv4_t src, R3S_ipv4_t dst, R3S_packet_t *p)
-{
-    R3S_status_t status;
-
-    status = R3S_packet_set_pf(cfg, R3S_PF_IPV4_SRC, src, p);
-    if (status != R3S_STATUS_SUCCESS) return status;
-
-    status = R3S_packet_set_pf(cfg, R3S_PF_IPV4_DST, dst, p);
+  status = RS3_packet_set_pf(cfg, RS3_PF_IPV4_SRC, src, p);
+  if (status != RS3_STATUS_SUCCESS)
     return status;
+
+  status = RS3_packet_set_pf(cfg, RS3_PF_IPV4_DST, dst, p);
+  return status;
 }
 
-R3S_status_t R3S_packet_set_ipv6(R3S_cfg_t cfg, R3S_ipv6_t src, R3S_ipv6_t dst, R3S_packet_t *p)
-{
-    R3S_status_t status;
+RS3_status_t RS3_packet_set_ipv6(RS3_cfg_t cfg, RS3_ipv6_t src, RS3_ipv6_t dst,
+                                 RS3_packet_t *p) {
+  RS3_status_t status;
 
-    status = R3S_packet_set_pf(cfg, R3S_PF_IPV6_SRC, src, p);
-    if (status != R3S_STATUS_SUCCESS) return status;
-
-    status = R3S_packet_set_pf(cfg, R3S_PF_IPV6_DST, dst, p);
+  status = RS3_packet_set_pf(cfg, RS3_PF_IPV6_SRC, src, p);
+  if (status != RS3_STATUS_SUCCESS)
     return status;
+
+  status = RS3_packet_set_pf(cfg, RS3_PF_IPV6_DST, dst, p);
+  return status;
 }
 
-R3S_status_t R3S_packet_set_tcp(R3S_cfg_t cfg, R3S_port_t src, R3S_port_t dst, R3S_packet_t *p)
-{
-    R3S_status_t status;
+RS3_status_t RS3_packet_set_tcp(RS3_cfg_t cfg, RS3_port_t src, RS3_port_t dst,
+                                RS3_packet_t *p) {
+  RS3_status_t status;
 
-    status = R3S_packet_set_pf(cfg, R3S_PF_TCP_SRC, src, p);
-    if (status != R3S_STATUS_SUCCESS) return status;
-
-    status = R3S_packet_set_pf(cfg, R3S_PF_TCP_DST, dst, p);
+  status = RS3_packet_set_pf(cfg, RS3_PF_TCP_SRC, src, p);
+  if (status != RS3_STATUS_SUCCESS)
     return status;
+
+  status = RS3_packet_set_pf(cfg, RS3_PF_TCP_DST, dst, p);
+  return status;
 }
 
-R3S_status_t R3S_packet_set_udp(R3S_cfg_t cfg, R3S_port_t src, R3S_port_t dst, R3S_packet_t *p)
-{
-    R3S_status_t status;
+RS3_status_t RS3_packet_set_udp(RS3_cfg_t cfg, RS3_port_t src, RS3_port_t dst,
+                                RS3_packet_t *p) {
+  RS3_status_t status;
 
-    status = R3S_packet_set_pf(cfg, R3S_PF_UDP_SRC, src, p);
-    if (status != R3S_STATUS_SUCCESS) return status;
-
-    status = R3S_packet_set_pf(cfg, R3S_PF_UDP_DST, dst, p);
+  status = RS3_packet_set_pf(cfg, RS3_PF_UDP_SRC, src, p);
+  if (status != RS3_STATUS_SUCCESS)
     return status;
+
+  status = RS3_packet_set_pf(cfg, RS3_PF_UDP_DST, dst, p);
+  return status;
 }
 
-R3S_status_t R3S_packet_set_sctp(R3S_cfg_t cfg, R3S_port_t src, R3S_port_t dst, R3S_v_tag_t tag, R3S_packet_t *p)
-{
-    R3S_status_t status;
+RS3_status_t RS3_packet_set_sctp(RS3_cfg_t cfg, RS3_port_t src, RS3_port_t dst,
+                                 RS3_v_tag_t tag, RS3_packet_t *p) {
+  RS3_status_t status;
 
-    status = R3S_packet_set_pf(cfg, R3S_PF_SCTP_SRC, src, p);
-    if (status != R3S_STATUS_SUCCESS) return status;
-
-    status = R3S_packet_set_pf(cfg, R3S_PF_SCTP_DST, dst, p);
-    if (status != R3S_STATUS_SUCCESS) return status;
-
-    status = R3S_packet_set_pf(cfg, R3S_PF_SCTP_V_TAG, tag, p);
+  status = RS3_packet_set_pf(cfg, RS3_PF_SCTP_SRC, src, p);
+  if (status != RS3_STATUS_SUCCESS)
     return status;
-}
 
-R3S_status_t R3S_packet_set_vxlan(R3S_cfg_t cfg, R3S_port_t outer, R3S_vni_t vni, out R3S_packet_t *p)
-{
-    R3S_status_t status;
-
-    status = R3S_packet_set_pf(cfg, R3S_PF_VXLAN_UDP_OUTER, outer, p);
-    if (status != R3S_STATUS_SUCCESS) return status;
-
-    status = R3S_packet_set_pf(cfg, R3S_PF_VXLAN_VNI, vni, p);
+  status = RS3_packet_set_pf(cfg, RS3_PF_SCTP_DST, dst, p);
+  if (status != RS3_STATUS_SUCCESS)
     return status;
+
+  status = RS3_packet_set_pf(cfg, RS3_PF_SCTP_V_TAG, tag, p);
+  return status;
 }
 
-R3S_status_t R3S_packet_rand(R3S_cfg_t cfg, out R3S_packet_t *p)
-{
-    R3S_pf_t    pf;
-    unsigned    chosen_opt;
-    R3S_bytes_t v;
-    unsigned    sz;
+RS3_status_t RS3_packet_set_vxlan(RS3_cfg_t cfg, RS3_port_t outer,
+                                  RS3_vni_t vni, out RS3_packet_t *p) {
+  RS3_status_t status;
 
-    R3S_packet_init(p);
-    init_rand();
+  status = RS3_packet_set_pf(cfg, RS3_PF_VXLAN_UDP_OUTER, outer, p);
+  if (status != RS3_STATUS_SUCCESS)
+    return status;
 
-    v          = NULL;
-    chosen_opt = rand() % cfg->n_loaded_opts;
-
-    for (int ipf = R3S_FIRST_PF; ipf <= R3S_LAST_PF; ipf++)
-    {   
-        pf = (R3S_pf_t) ipf;
-        
-        if (R3S_loaded_opt_check_pf(cfg->loaded_opts[chosen_opt], pf) != R3S_STATUS_PF_LOADED)
-            continue;
-
-        sz = R3S_pf_sz(pf);
-        v  = (R3S_bytes_t) realloc(v, sizeof(R3S_byte_t) * sz);
-
-        for (unsigned byte = 0; byte < sz; byte++)
-            v[byte] = (R3S_byte_t) rand() & 0xff;
-        
-        R3S_packet_set_pf(cfg, pf, v, p);
-    }
-
-    free(v);
-
-    return R3S_STATUS_SUCCESS;
+  status = RS3_packet_set_pf(cfg, RS3_PF_VXLAN_VNI, vni, p);
+  return status;
 }
 
-R3S_status_t R3S_packets_rand(R3S_cfg_t cfg, unsigned n_packets, out R3S_packet_t **p)
-{
-    *p = (R3S_packet_t*) malloc(sizeof(R3S_packet_t) * n_packets);
-    
-    for (unsigned ipacket = 0; ipacket < n_packets; ipacket++)
-        R3S_packet_rand(cfg, &((*p)[ipacket]));
+RS3_status_t RS3_packet_rand(RS3_cfg_t cfg, out RS3_packet_t *p) {
+  RS3_pf_t pf;
+  unsigned chosen_opt;
+  RS3_bytes_t v;
+  unsigned sz;
 
-    return R3S_STATUS_SUCCESS;
+  RS3_packet_init(p);
+  init_rand();
+
+  v = NULL;
+  chosen_opt = rand() % cfg->n_loaded_opts;
+
+  for (int ipf = RS3_FIRST_PF; ipf <= RS3_LAST_PF; ipf++) {
+    pf = (RS3_pf_t)ipf;
+
+    if (RS3_loaded_opt_check_pf(cfg->loaded_opts[chosen_opt], pf) !=
+        RS3_STATUS_PF_LOADED)
+      continue;
+
+    sz = RS3_pf_sz(pf);
+    v = (RS3_bytes_t)realloc(v, sizeof(RS3_byte_t) * sz);
+
+    for (unsigned byte = 0; byte < sz; byte++)
+      v[byte] = (RS3_byte_t)rand() & 0xff;
+
+    RS3_packet_set_pf(cfg, pf, v, p);
+  }
+
+  free(v);
+
+  return RS3_STATUS_SUCCESS;
 }
 
-R3S_status_t R3S_packet_to_loaded_opt(R3S_cfg_t cfg, R3S_packet_t p, R3S_loaded_opt_t *loaded_opt)
-{
-    unsigned n_opts;
-    int chosen_iopt;
+RS3_status_t RS3_packets_rand(RS3_cfg_t cfg, unsigned n_packets,
+                              out RS3_packet_t **p) {
+  *p = (RS3_packet_t *)malloc(sizeof(RS3_packet_t) * n_packets);
 
-    int      match;
-    int      max_match;
+  for (unsigned ipacket = 0; ipacket < n_packets; ipacket++)
+    RS3_packet_rand(cfg, &((*p)[ipacket]));
 
-    max_match   = 0;
-    chosen_iopt = -1;
-    n_opts      = cfg->n_loaded_opts;
-    
-    for (unsigned iopt = 0; iopt < n_opts; iopt++)
-    {
+  return RS3_STATUS_SUCCESS;
+}
+
+RS3_status_t RS3_packet_to_loaded_opt(RS3_cfg_t cfg, RS3_packet_t p,
+                                      RS3_loaded_opt_t *loaded_opt) {
+  unsigned n_opts;
+  int chosen_iopt;
+
+  int match;
+  int max_match;
+
+  max_match = 0;
+  chosen_iopt = -1;
+  n_opts = cfg->n_loaded_opts;
+
+  for (unsigned iopt = 0; iopt < n_opts; iopt++) {
+    match = 0;
+
+    for (unsigned ipf = RS3_FIRST_PF; ipf <= RS3_LAST_PF; ipf++) {
+      if (RS3_loaded_opt_check_pf(cfg->loaded_opts[iopt], (RS3_pf_t)ipf) ==
+          RS3_STATUS_PF_NOT_LOADED)
+        continue;
+
+      if (!RS3_packet_has_pf(p, (RS3_pf_t)ipf)) {
         match = 0;
+        break;
+      }
 
-        for (unsigned ipf = R3S_FIRST_PF; ipf <= R3S_LAST_PF; ipf++)
-        {
-            if (R3S_loaded_opt_check_pf(cfg->loaded_opts[iopt], (R3S_pf_t) ipf) == R3S_STATUS_PF_NOT_LOADED)
-                continue;
-
-            if (!R3S_packet_has_pf(p, (R3S_pf_t) ipf)) { match = 0; break; }
-            
-            match++;
-        }
-
-        if (match > max_match)
-        {
-            chosen_iopt = iopt;
-            max_match = match;
-        }
+      match++;
     }
 
-    if (chosen_iopt == -1) return R3S_STATUS_NO_SOLUTION;
-    
-    *loaded_opt = cfg->loaded_opts[chosen_iopt];
+    if (match > max_match) {
+      chosen_iopt = iopt;
+      max_match = match;
+    }
+  }
 
-    return R3S_STATUS_SUCCESS;
+  if (chosen_iopt == -1)
+    return RS3_STATUS_NO_SOLUTION;
+
+  *loaded_opt = cfg->loaded_opts[chosen_iopt];
+
+  return RS3_STATUS_SUCCESS;
 }

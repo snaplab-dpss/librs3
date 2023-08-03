@@ -1,5 +1,5 @@
-#ifndef __R3S_UTIL_H__
-#define __R3S_UTIL_H__
+#ifndef __RS3_UTIL_H__
+#define __RS3_UTIL_H__
 
 #include <stdbool.h>
 #include <stdint.h>

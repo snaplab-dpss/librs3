@@ -1,5 +1,5 @@
-#ifndef __R3S_SOLVER_H__
-#define __R3S_SOLVER_H__
+#ifndef __RS3_SOLVER_H__
+#define __RS3_SOLVER_H__
 
 #include "../include/rs3.h"
 
@@ -11,6 +11,6 @@ typedef struct {
     int *wpipe;
 } comm_t;
 
-typedef void (*R3S_worker)(R3S_cfg_t,R3S_cnstrs_func);
+typedef void (*RS3_worker)(RS3_cfg_t,RS3_cnstrs_func);
 
 #endif

@@ -1,5 +1,5 @@
-#ifndef __R3S_HASH_H__
-#define __R3S_HASH_H__
+#ifndef __RS3_HASH_H__
+#define __RS3_HASH_H__
 
 #include "../include/rs3.h"
 
@@ -8,10 +8,10 @@
 
 typedef unsigned packet_fields_t;
 
-R3S_key_hash_in_t R3S_packet_to_hash_input(R3S_loaded_opt_t opt, R3S_packet_t h);
-R3S_packet_t      R3S_key_hash_in_to_packet(R3S_cfg_t cfg, R3S_loaded_opt_t opt, R3S_key_hash_in_t hi);
-void              R3S_key_rand(R3S_cfg_t cfg, out R3S_key_t key);
-void              R3S_zero_key(R3S_key_t key);
-bool              R3S_is_zero_key(R3S_key_t key);
+RS3_key_hash_in_t RS3_packet_to_hash_input(RS3_loaded_opt_t opt, RS3_packet_t h);
+RS3_packet_t      RS3_key_hash_in_to_packet(RS3_cfg_t cfg, RS3_loaded_opt_t opt, RS3_key_hash_in_t hi);
+void              RS3_key_rand(RS3_cfg_t cfg, out RS3_key_t key);
+void              RS3_zero_key(RS3_key_t key);
+bool              RS3_is_zero_key(RS3_key_t key);
 
 #endif
