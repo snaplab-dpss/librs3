@@ -1235,14 +1235,17 @@ RS3_status_t master(RS3_cfg_t cfg, RS3_cnstrs_func mk_p_cnstrs, int np,
   int wstatus;
   int maxfd;
   fd_set fds;
+  int tries = 0;
 
   {
     int p = 0;
     if (cfg->skew_analysis) {
       launch_worker(&worker_sat_checker, cfg, mk_p_cnstrs, p, comm);
 
-      for (p += 1; p < np; p++)
+      for (p += 1; p < np; p++) {
+        tries++;
         launch_worker(&worker_key_adjuster, cfg, mk_p_cnstrs, p, comm);
+      }
     } else {
       launch_worker(&worker_key_finder, cfg, mk_p_cnstrs, p, comm);
     }
@@ -1269,11 +1272,12 @@ RS3_status_t master(RS3_cfg_t cfg, RS3_cnstrs_func mk_p_cnstrs, int np,
       }
 
       switch (status) {
-        case RS3_STATUS_NO_SOLUTION:
+        case RS3_STATUS_NO_SOLUTION: {
           DEBUG_PLOG("unsat\n");
           return status;
+        }
 
-        case RS3_STATUS_TIMEOUT:
+        case RS3_STATUS_TIMEOUT: {
           waitpid(comm.pid[p], &wstatus, 0);
           comm.pid[p] = -1;
 
@@ -1288,18 +1292,21 @@ RS3_status_t master(RS3_cfg_t cfg, RS3_cnstrs_func mk_p_cnstrs, int np,
           if (!is_someone_alive) {
             return status;
           }
-
-          break;
+        } break;
 
         case RS3_STATUS_HAS_SOLUTION:
-        case RS3_STATUS_BAD_SOLUTION:
+        case RS3_STATUS_BAD_SOLUTION: {
           waitpid(comm.pid[p], &wstatus, 0);
           comm.pid[p] = -1;
-          launch_worker(worker_key_adjuster, cfg, mk_p_cnstrs, p, comm);
 
-          break;
+          tries++;
+          if (tries < DEFAULT_MAX_RETRIES_SKEW_ANALYSIS) {
+            DEBUG_PLOG("Starting try #%d\n", tries + 1);
+            launch_worker(worker_key_adjuster, cfg, mk_p_cnstrs, p, comm);
+          }
+        } break;
 
-        case RS3_STATUS_SUCCESS:
+        case RS3_STATUS_SUCCESS: {
           for (unsigned ikey = 0; ikey < cfg->n_keys; ikey++) {
             if (read(comm.rpipe[p], keys[ikey], KEY_SIZE) == -1) {
               DEBUG_PLOG("IO ERROR: unable to read status from worker\n");
@@ -1317,6 +1324,7 @@ RS3_status_t master(RS3_cfg_t cfg, RS3_cnstrs_func mk_p_cnstrs, int np,
           }
 
           return status;
+        }
 
         default:
           break; // will never get here
@@ -1325,6 +1333,9 @@ RS3_status_t master(RS3_cfg_t cfg, RS3_cnstrs_func mk_p_cnstrs, int np,
       break;
     }
   }
+
+  DEBUG_PLOG("No more available tries.\n");
+  return RS3_STATUS_BAD_SOLUTION;
 }
 
 RS3_status_t RS3_keys_fit_cnstrs(RS3_cfg_t cfg, RS3_cnstrs_func mk_p_cnstrs,

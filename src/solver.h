@@ -3,14 +3,14 @@
 
 #include "../include/rs3.h"
 
-#define SOLVER_TIMEOUT_SEC      (60 * 60 * 3) // 3 hours
+#define SOLVER_TIMEOUT_SEC (60 * 30) // 30 minutes
 
 typedef struct {
-    int *pid;
-    int *rpipe;
-    int *wpipe;
+  int *pid;
+  int *rpipe;
+  int *wpipe;
 } comm_t;
 
-typedef void (*RS3_worker)(RS3_cfg_t,RS3_cnstrs_func);
+typedef void (*RS3_worker)(RS3_cfg_t, RS3_cnstrs_func);
 
 #endif

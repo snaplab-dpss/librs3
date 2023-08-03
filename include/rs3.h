@@ -44,6 +44,7 @@ extern "C" {
 #define HASH_MASK(hash) ((hash) & (LUT_SIZE - 1))
 
 #define DEFAULT_NUM_CORES_SKEW_ANALYSIS 16
+#define DEFAULT_MAX_RETRIES_SKEW_ANALYSIS 10
 
 /** \name Types */
 /// \{
