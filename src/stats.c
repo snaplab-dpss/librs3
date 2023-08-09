@@ -79,11 +79,7 @@ bool RS3_stats_eval(RS3_cfg_t cfg, RS3_key_t key, out RS3_stats_t *stats) {
 
   free(packets);
 
-  int n_cores = cfg->skew_analysis_params.n_cores > 0
-                    ? cfg->skew_analysis_params.n_cores
-                    : DEFAULT_NUM_CORES_SKEW_ANALYSIS;
-
-  bool pass = stats->used_lut_entries >= n_cores;
+  bool pass = stats->used_lut_entries >= cfg->skew_analysis_params.n_cores;
 
   DEBUG_PLOG("Key evaluation:\n%s\n%sPass: %d\n", RS3_key_to_string(key),
              RS3_stats_to_string(*stats), pass);

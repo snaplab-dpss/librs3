@@ -63,6 +63,7 @@ void RS3_cfg_init(RS3_cfg_t *cfg) {
 
   (*cfg)->skew_analysis_params.pcap_fname = NULL;
   (*cfg)->skew_analysis_params.time_limit = -1;
+  (*cfg)->skew_analysis_params.n_cores = DEFAULT_NUM_CORES_SKEW_ANALYSIS;
 
   (*cfg)->n_keys = 1;
 }
