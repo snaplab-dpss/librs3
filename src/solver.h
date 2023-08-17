@@ -3,7 +3,7 @@
 
 #include "../include/rs3.h"
 
-#define SOLVER_TIMEOUT_SEC (60 * 30) // 30 minutes
+#define SOLVER_TIMEOUT_SEC (60 * 60) // 1 hour
 
 typedef struct {
   int *pid;
